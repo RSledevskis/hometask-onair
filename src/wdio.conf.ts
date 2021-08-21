@@ -57,6 +57,13 @@ export const config: WebdriverIO.Config = {
         maxInstances: 1,
         //
         browserName: 'chrome',
+        "goog:chromeOptions": {
+            // to run chrome headless the following flags are required
+            // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
+            args: [
+                "--window-size=1920,1080",  // Sets the initial window size. Provided as string in the format "800,600".
+            ],
+        },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
@@ -159,7 +166,7 @@ export const config: WebdriverIO.Config = {
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        tagExpression: '',
+        tagExpression: '@test',
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
