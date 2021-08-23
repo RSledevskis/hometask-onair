@@ -1,26 +1,17 @@
-Feature: The Internet Guinea Pig Website
-
-  #@test
-  Scenario Outline: As a user, I can log into the secure area
-    Given I am on the "login" page
-    When I login with <username> and <password>
-    Then I should see a flash message saying <message>
-
-    Examples:
-      | username | password             | message                        |
-      | tomsmith | SuperSecretPassword! | You logged into a secure area! |
-      | foobar   | barfoo               | Your username is invalid!      |
-
+Feature: Favorite Items Feature
 
   @test
-  Scenario: As a user, I can log into the secure area
+  Scenario: Selected items appearance in Favorites
     Given I open the "https://ss.com" page
-    Then I switch the language "ru"
-    Then I wait for 10000 seconds
-#    When I login with <username> and <password>
-#    Then I should see a flash message saying <message>
-#
-#    Examples:
-#      | username | password             | message                        |
-#      | tomsmith | SuperSecretPassword! | You logged into a secure area! |
-#      | foobar   | barfoo               | Your username is invalid!      |
+    * I switch the language "ru"
+    * I click on element "a[href*='/ru/electronics'][title*='Электротехника']"
+    * I click on element "a[href*='/ru/electronics/search']"
+    When I enter value "Computers" into the search field "#ptxt"
+    * I select "riga_f" location from dropdown menu "#s_region_select"
+    * I click on element "#sbtn"
+    * I click on element "td > a[href*='/ru/electronics/search/riga_f/']"
+    * I enter value "160" into the search field "input[name*='topt[8][min]']"
+    * I enter value "300" into the search field "input[name*='topt[8][max]']"
+    * I click on element "#sbtn"
+    * I select three random products from list
+    Then Framework verifies selected products in favorites
